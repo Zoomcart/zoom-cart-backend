@@ -15,7 +15,9 @@
 	<description>Backend for ZoomCart</description>
 	<properties>
 		<java.version>21</java.version>
+		<openapi-generator-version>7.4.0</openapi-generator-version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -49,6 +51,16 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>openapi-generator</artifactId>
+			<version>${openapi-generator-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.6</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -57,6 +69,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<mainClass>com.zoomcart.backend.ZoomCartBackend</mainClass>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -64,6 +77,38 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>${openapi-generator-version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>
+								${project.basedir}/src/main/resources/api-spec.yml
+							</inputSpec>
+							<generatorName>spring</generatorName>
+							<apiPackage>com.zoomcart.controller</apiPackage>
+							<modelPackage>com.zoomcart.model</modelPackage>
+							<generateModelDocumentation>false</generateModelDocumentation>
+							<generateApiDocumentation>false</generateApiDocumentation>
+							<configOptions>
+								<sourceFolder>src/gen/main/java</sourceFolder>
+								<delegatePattern>true</delegatePattern>
+								<dateLibrary>java8</dateLibrary>
+								<serializableModel>true</serializableModel>
+								<useTags>true</useTags>
+								<useSpringBoot3>true</useSpringBoot3>
+								<useSpringfox>false</useSpringfox>
+								<library>spring-boot</library>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
