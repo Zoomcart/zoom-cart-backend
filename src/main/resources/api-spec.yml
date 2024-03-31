@@ -1,0 +1,67 @@
+openapi: 3.0.3
+info:
+  title: ZoomCart
+  description: |-
+    ZoomCart API doc
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+tags:
+  - name: Product
+    description: Purchasable items
+paths:
+  /product:
+    post:
+      tags:
+        - Product
+      summary: Add a new product
+      description: Add a new product with its details
+      operationId: addProduct
+      requestBody:
+        description: Create a product
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Invalid input
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: Ribeye Steak
+        description:
+          type: string
+          example: something about the steak descr.
+        quantity_unit:
+          type: string
+          enum:
+            - lb
+            - piece
+        price:
+          type: number
+          format: double
+          example: 9.99
+  requestBodies:
+    Pet:
+      description: Product
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Product'
