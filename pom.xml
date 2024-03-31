@@ -56,6 +56,11 @@
 			<artifactId>openapi-generator</artifactId>
 			<version>${openapi-generator-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.6</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -64,6 +69,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<mainClass>com.zoomcart.backend.ZoomCartBackend</mainClass>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -86,8 +92,20 @@
 								${project.basedir}/src/main/resources/api-spec.yml
 							</inputSpec>
 							<generatorName>spring</generatorName>
-							<apiPackage>com.baeldung.openapi.api</apiPackage>
-							<modelPackage>com.baeldung.openapi.model</modelPackage>
+							<apiPackage>com.zoomcart.controller</apiPackage>
+							<modelPackage>com.zoomcart.model</modelPackage>
+							<generateModelDocumentation>false</generateModelDocumentation>
+							<generateApiDocumentation>false</generateApiDocumentation>
+							<configOptions>
+								<sourceFolder>src/gen/main/java</sourceFolder>
+								<delegatePattern>true</delegatePattern>
+								<dateLibrary>java8</dateLibrary>
+								<serializableModel>true</serializableModel>
+								<useTags>true</useTags>
+								<useSpringBoot3>true</useSpringBoot3>
+								<useSpringfox>false</useSpringfox>
+								<library>spring-boot</library>
+							</configOptions>
 						</configuration>
 					</execution>
 				</executions>
