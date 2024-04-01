@@ -43,5 +43,5 @@ public class ProductEntity {
     private Boolean isAvailable;
 
     @Column
-    private String image_url;
+    private String imageUrl;
 }

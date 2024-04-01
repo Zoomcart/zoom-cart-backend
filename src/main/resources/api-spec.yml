@@ -51,13 +51,18 @@ components:
           example: something about the steak descr.
         quantity_unit:
           type: string
-          enum:
-            - lb
-            - piece
+          default: lbs
+          example: lbs, pieces
         price:
           type: number
           format: double
           example: 9.99
+        isAvailable:
+          type: boolean
+          example: true
+        imageUrl:
+          type: string
+          example: url to aws bucket? or keep it static in UI
   requestBodies:
     Pet:
       description: Product

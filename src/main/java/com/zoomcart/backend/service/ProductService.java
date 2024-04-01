@@ -1,5 +1,7 @@
 package com.zoomcart.backend.service;
 
+import com.zoomcart.backend.model.entity.ProductEntity;
+import com.zoomcart.backend.model.mapper.ProductMapper;
 import com.zoomcart.backend.repository.ProductRepository;
 import com.zoomcart.controller.ProductApiDelegate;
 import com.zoomcart.model.Product;
@@ -11,9 +13,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ProductService implements ProductApiDelegate {
     private ProductRepository productRepository;
+    private ProductMapper productMapper;
 
     @Override
     public ResponseEntity<Product> addProduct(Product product) {
-        return null;
+        ProductEntity productEntity = productMapper.createProductEntityFromDTO(product);
+        ProductEntity savedProductEntity = productRepository.save(productEntity);
+        return ResponseEntity.ok(productMapper.getProductDTOFromProductEntity(savedProductEntity));
     }
 }
