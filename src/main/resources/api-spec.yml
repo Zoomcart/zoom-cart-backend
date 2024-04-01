@@ -11,6 +11,22 @@ tags:
   - name: Product
     description: Purchasable items
 paths:
+  /product-list:
+    get:
+      tags:
+        - Product
+      summary: Get all products
+      description: Get all products
+      operationId: getProducts
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
   /product:
     post:
       tags:
