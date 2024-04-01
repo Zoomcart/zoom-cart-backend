@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,26 +18,30 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "products")
+public class ProductEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
-
-    @Column(unique = true)
-    private String username;
-
-    @Column(unique = true)
-    private String email;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long productId;
 
     @Column
-    private String passwordHash;
+    private String name;
 
     @Column
-    private String oauthProvider;
+    private String description;
 
     @Column
-    private String oauthId;
+    private double price;
+
+    @Column
+    private String quantityUnit;
+
+    @Column
+    private Boolean isAvailable;
+
+    @Column
+    private String image_url;
 }
